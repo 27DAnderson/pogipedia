@@ -26,32 +26,35 @@
                 <h2>Pogipedia</h2>
             </div>
             
+            <!-- Pog rarity descriptions -->
+            <div class="light-mode raritydesc" id="raritydesc"></div>
+            
             <!-- Color Guide -->
             <div class="color-guide light-mode">
                 <h3>Color Guide</h3>
                 <div class="color-row">
                     <div class="color-item">
-                        <div class="color-box trash"></div>
+                        <div class="color-box trash" onmouseenter="descrarityenter('trash')" onmouseleave="descrarityleave()"></div>
                         <span>Trash</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-box common"></div>
+                        <div class="color-box common" onmouseenter="descrarityenter('common')" onmouseleave="descrarityleave()"></div>
                         <span>Common</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-box uncommon"></div>
+                        <div class="color-box uncommon" onmouseenter="descrarityenter('uncommon')" onmouseleave="descrarityleave()"></div>
                         <span>Uncommon</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-box rare"></div>
+                        <div class="color-box rare" onmouseenter="descrarityenter('rare')" onmouseleave="descrarityleave()"></div>
                         <span>Rare</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-box mythic"></div>
+                        <div class="color-box mythic" onmouseenter="descrarityenter('mythic')" onmouseleave="descrarityleave()"></div>
                         <span>Mythic</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-box unknown"></div>
+                        <div class="color-box unknown" onmouseenter="descrarityenter('unknown')" onmouseleave="descrarityleave()"></div>
                         <span>Unknown</span>
                     </div>
                 </div>

@@ -373,10 +373,12 @@ function applyTheme(isDarkMode) {
         document.body.classList.add('dark-mode');
         document.querySelector('.modal-content').classList.add('dark-mode');
         document.querySelector('.color-guide').classList.add('dark-mode');
+        document.querySelector('.raritydesc').classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
         document.querySelector('.modal-content').classList.remove('dark-mode');
         document.querySelector('.color-guide').classList.remove('dark-mode');
+        document.querySelector('.raritydesc').classList.remove('dark-mode');
     }
 }
 
@@ -471,12 +473,22 @@ function adjustTable() {
 function applyTheme(isDarkMode) {
     if (isDarkMode) {
         document.body.classList.add('dark-mode');
+        document.body.classList.remove('light-mode');
         document.querySelector('.modal-content').classList.add('dark-mode');
+        document.querySelector('.modal-content').classList.remove('light-mode');
         document.querySelector('.color-guide').classList.add('dark-mode');
+        document.querySelector('.color-guide').classList.remove('light-mode');
+        document.querySelector('.raritydesc').classList.add('dark-mode');
+        document.querySelector('.raritydesc').classList.remove('light-mode');
     } else {
+        document.body.classList.add('light-mode');
         document.body.classList.remove('dark-mode');
+        document.querySelector('.modal-content').classList.add('light-mode');
         document.querySelector('.modal-content').classList.remove('dark-mode');
+        document.querySelector('.color-guide').classList.add('light-mode');
         document.querySelector('.color-guide').classList.remove('dark-mode');
+        document.querySelector('.raritydesc').classList.add('light-mode');
+        document.querySelector('.raritydesc').classList.remove('dark-mode');
     }
 }
 
@@ -520,3 +532,32 @@ function getBackgroundColor(rank) {
     // Fallback if rank is undefined or invalid
     return ranks[rank] || ranks['Default'];
 }
+
+// Rarity Description functions
+const raritydesc = document.getElementById("raritydesc");
+function descrarityenter(whichcolor) {
+    raritydesc.style.display = "block";
+    if (whichcolor == "trash") {
+        raritydesc.innerHTML = "<strong>Trash</strong><br>Pogs that are considered low quality or undesirable. These pogs are often mass-produced and lack unique features or designs. They may be damaged, poorly made, or simply not appealing to collectors.";
+    } else if (whichcolor == "common") {
+        raritydesc.innerHTML = "<strong>Common</strong><br>Pogs that are widely available and easy to find. These pogs are typically mass-produced and may feature popular designs or themes. While they may not be particularly rare or valuable, they can still be fun to collect and trade.";
+    } else if (whichcolor == "uncommon") {
+        raritydesc.innerHTML = "<strong>Uncommon</strong><br>Pogs that are less common than regular pogs, but still relatively easy to find. These pogs may feature unique designs or themes, or may be part of a limited edition set. While they may not be particularly rare or valuable, they can still be a fun addition to a collection.";
+    } else if (whichcolor == "rare") {
+        raritydesc.innerHTML = "<strong>Rare</strong><br>Pogs that are hard to find and highly sought after by collectors. These pogs may feature unique designs or themes, or may be part of a limited edition set. They may also be older pogs that are no longer in production. Rare pogs can be quite valuable, and collectors may go to great lengths to acquire them.";
+    } else if (whichcolor == "mythic") {
+        raritydesc.innerHTML = "<strong>Mythic</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Mythic pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
+    } else if (whichcolor == "unknown") {
+        raritydesc.innerHTML = "<strong>Unknown</strong><br>Pogs that have not been assigned a rarity level. These pogs may be new releases or pogs that have not yet been evaluated by collectors. While they may not have a defined rarity level, they can still be a fun addition to a collection.";
+    }
+}
+function descrarityleave() {
+    raritydesc.style.display = "none";
+}
+document.addEventListener('mousemove', (event) => {
+    if (raritydesc.style.display === "block") {
+        raritydesc.style.left = `${event.pageX + 10}px`;
+        raritydesc.style.top = `${event.pageY + 25}px`;
+        raritydesc.style.right = `${window.innerWidth - (event.pageX + 10 + 500)}px`;
+    }  
+});

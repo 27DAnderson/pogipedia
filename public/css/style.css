@@ -425,3 +425,24 @@ input:checked + .slider:before {
 .color-guide.dark-mode .color-box.rare { background-color: #2d3f4d; }
 .color-guide.dark-mode .color-box.mythic { background-color: #34314b; }
 .color-guide.dark-mode .color-box.unknown { background-color:  #333333; }
+
+.raritydesc.light-mode {
+    display: none;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 9999;
+}
+.raritydesc.dark-mode {
+    display: none;
+    position: absolute;
+    background: rgba(18, 18, 18, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 9999;
+}
