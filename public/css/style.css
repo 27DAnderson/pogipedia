@@ -320,7 +320,7 @@ tbody tr:hover {
 .color-guide .color-row {
     display: flex; /* Use flexbox for horizontal alignment */
     justify-content: center; /* Center items horizontally */
-    gap: 20px; /* Add space between items */
+    gap: 10px; /* Add space between items */
     flex-wrap: wrap; /* Wrap items to the next line if needed */
 }
 
@@ -329,6 +329,7 @@ tbody tr:hover {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 75.63px;
 }
 .color-guide.dark-mode h3 {
     color: #bbbbbb; /* Lighter text color for better readability in dark mode */
@@ -411,20 +412,20 @@ input:checked + .slider:before {
 }
 
 /* Light mode colors */
-.color-guide.light-mode .color-box.trash { background-color: #fcdcdc; }
-.color-guide.light-mode .color-box.common { background-color: #ffedc1; }
-.color-guide.light-mode .color-box.uncommon { background-color: #EBF8DC; }
-.color-guide.light-mode .color-box.rare { background-color: #DCF2F8; }
-.color-guide.light-mode .color-box.mythic { background-color: #E7D5F3; }
-.color-guide.light-mode .color-box.unknown { background-color: #FFFFFF; }
+.color-guide.light-mode .color-box.common { background-color: #ffffff; }
+.color-guide.light-mode .color-box.uncommon { background-color: #ebf8dc; }
+.color-guide.light-mode .color-box.rare { background-color: #dcf2f8; }
+.color-guide.light-mode .color-box.epic { background-color: #e7d5f3; }
+.color-guide.light-mode .color-box.legendary { background-color: #fdcc99; }
+.color-guide.light-mode .color-box.mythic { background-color: #ff9898; }
 
 /* Dark mode colors */
-.color-guide.dark-mode .color-box.trash { background-color: #412020; }
-.color-guide.dark-mode .color-box.common { background-color: #4b3317; }
+.color-guide.dark-mode .color-box.common { background-color: #333333; }
 .color-guide.dark-mode .color-box.uncommon { background-color: #3d442f; }
 .color-guide.dark-mode .color-box.rare { background-color: #2d3f4d; }
-.color-guide.dark-mode .color-box.mythic { background-color: #34314b; }
-.color-guide.dark-mode .color-box.unknown { background-color:  #333333; }
+.color-guide.dark-mode .color-box.epic { background-color: #34314b; }
+.color-guide.dark-mode .color-box.legendary { background-color: #4b3317; }
+.color-guide.dark-mode .color-box.mythic { background-color: #412020; }
 
 .raritydesc.light-mode {
     display: none;

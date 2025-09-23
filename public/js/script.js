@@ -509,20 +509,22 @@ window.onclick = function (event) {
 };
 function getBackgroundColor(rank) {
     const lightRanks = {
-        'Uncommon': '#EBF8DC',
-        'Trash': '#fcdcdc',
-        'Common': '#ffedc1',
-        'Rare': '#DCF2F8',
-        'Mythic': '#E7D5F3',
+        'Common':'#ffffff',
+        'Uncommon':'#ebf8dc',
+        'Rare':'#dcf2f8',
+        'Epic':'#e7d5f3',
+        'Legendary':'#fdcc99',
+        'Mythic':'#ff9898',
         'Default': '#FFFFFF'
     };
 
     const darkRanks = {
-        'Uncommon': '#3d442f',
-        'Trash': '#412020',
-        'Common': '#4b3317',
-        'Rare': '#2d3f4d',
-        'Mythic': '#34314b',
+        'Common':'#333333',
+        'Uncommon':'#3d442f',
+        'Rare':'#2d3f4d',
+        'Epic':'#34314b',
+        'Legendary':'#4b3317',
+        'Mythic':'#412020',
         'Default': '#333333'
     };
 
@@ -537,14 +539,16 @@ function getBackgroundColor(rank) {
 const raritydesc = document.getElementById("raritydesc");
 function descrarityenter(whichcolor) {
     raritydesc.style.display = "block";
-    if (whichcolor == "trash") {
-        raritydesc.innerHTML = "<strong>Trash</strong><br>Pogs that are considered low quality or undesirable. These pogs are often mass-produced and lack unique features or designs. They may be damaged, poorly made, or simply not appealing to collectors.";
+    if (whichcolor == "epic") {
+        raritydesc.innerHTML = "<strong>Epic</strong><br>Pogs that are considered low quality or undesirable. These pogs are often mass-produced and lack unique features or designs. They may be damaged, poorly made, or simply not appealing to collectors.";
     } else if (whichcolor == "common") {
         raritydesc.innerHTML = "<strong>Common</strong><br>Pogs that are widely available and easy to find. These pogs are typically mass-produced and may feature popular designs or themes. While they may not be particularly rare or valuable, they can still be fun to collect and trade.";
     } else if (whichcolor == "uncommon") {
         raritydesc.innerHTML = "<strong>Uncommon</strong><br>Pogs that are less common than regular pogs, but still relatively easy to find. These pogs may feature unique designs or themes, or may be part of a limited edition set. While they may not be particularly rare or valuable, they can still be a fun addition to a collection.";
     } else if (whichcolor == "rare") {
         raritydesc.innerHTML = "<strong>Rare</strong><br>Pogs that are hard to find and highly sought after by collectors. These pogs may feature unique designs or themes, or may be part of a limited edition set. They may also be older pogs that are no longer in production. Rare pogs can be quite valuable, and collectors may go to great lengths to acquire them.";
+    } else if (whichcolor == "legendary") {
+        raritydesc.innerHTML = "<strong>Legendary</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Legendary pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
     } else if (whichcolor == "mythic") {
         raritydesc.innerHTML = "<strong>Mythic</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Mythic pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
     } else if (whichcolor == "unknown") {
