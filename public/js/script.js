@@ -29,7 +29,6 @@ function searchPogs() {
             data.forEach(function (pog) {
                 var row = table.insertRow();
                 row.style.backgroundColor = pog.backgroundColor;
-                console.log(1, pog.rank, pog.backgroundColor);
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
@@ -197,7 +196,6 @@ function searchPogs() {
             data.forEach(function (pog) {
                 var row = table.insertRow();
                 row.style.backgroundColor = pog.backgroundColor; // Set the background color based on rank
-                console.log(2, pog.rank, pog.backgroundColor);
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
