@@ -89,7 +89,6 @@ footer .back-to-top:hover {
     overflow-y: auto;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: medium;
@@ -228,58 +227,6 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-/* Color guide styles */
-
-.color-guide {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 100%; /* Allow full width */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.color-guide h3 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-}
-
-.color-guide .color-row {
-    display: flex; /* Use flexbox for horizontal alignment */
-    justify-content: center; /* Center items horizontally */
-    gap: 10px; /* Add space between items */
-    flex-wrap: wrap; /* Wrap items to the next line if needed */
-}
-
-.color-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 75.63px;
-}
-.color-guide.dark-mode h3 {
-    color: #bbbbbb; /* Lighter text color for better readability in dark mode */
-}
-.color-box {
-    width: 40px; /* Box size */
-    height: 40px;
-    margin-bottom: 8px;
-    border: 1px solid #000;
-    border-radius: 4px; /* Rounded corners */
-}
-
-.color-item span {
-    font-size: 14px;
-    color: #949494;
-}
-
 
 /* Switch styles */
 .switch {
@@ -350,8 +297,15 @@ input:checked + .slider:before {
 .row {
     display: flex;
     justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+}
+
+#color-row {
+    gap: 10px;
+}
+
+#tag-row {
+    gap: 20px;
 }
 
 .item {
@@ -359,6 +313,7 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 75.63px;
 }
 
 #color-guide .box {
@@ -397,7 +352,7 @@ body.dark-mode h2 {
     color: #7c7a7a;
 }
 
-body.dark-mode .modal-content {
+.modal-content.dark-mode{
     background-color: #1e1e1e;
     color: #fff;
     border: 1px solid #444;
@@ -418,20 +373,20 @@ body.dark-mode .modal-content {
 }
 
 /* Light mode colors */
-.color-guide.light-mode .color-box.common { background-color: #ffffff; }
-.color-guide.light-mode .color-box.uncommon { background-color: #ebf8dc; }
-.color-guide.light-mode .color-box.rare { background-color: #dcf2f8; }
-.color-guide.light-mode .color-box.epic { background-color: #e7d5f3; }
-.color-guide.light-mode .color-box.legendary { background-color: #fdcc99; }
-.color-guide.light-mode .color-box.mythic { background-color: #ff9898; }
+.guide.light-mode .box#common { background-color: #ffffff; }
+.guide.light-mode .box#uncommon { background-color: #ebf8dc; }
+.guide.light-mode .box#rare { background-color: #dcf2f8; }
+.guide.light-mode .box#epic { background-color: #e7d5f3; }
+.guide.light-mode .box#mythic { background-color: #ff9898; }
+.guide.light-mode .box#legendary { background-color: #fdcc99; }
 
 /* Dark mode colors */
-.color-guide.dark-mode .color-box.common { background-color: #333333; }
-.color-guide.dark-mode .color-box.uncommon { background-color: #3d442f; }
-.color-guide.dark-mode .color-box.rare { background-color: #2d3f4d; }
-.color-guide.dark-mode .color-box.epic { background-color: #34314b; }
-.color-guide.dark-mode .color-box.legendary { background-color: #4b3317; }
-.color-guide.dark-mode .color-box.mythic { background-color: #412020; }
+.guide.dark-mode .box#common { background-color: #333333; }
+.guide.dark-mode .box#uncommon { background-color: #3d442f; }
+.guide.dark-mode .box#rare { background-color: #2d3f4d; }
+.guide.dark-mode .box#epic { background-color: #34314b; }
+.guide.dark-mode .box#legendary { background-color: #4b3317; }
+.guide.dark-mode .box#mythic { background-color: #412020; }
 
 .raritydesc.light-mode {
     display: none;

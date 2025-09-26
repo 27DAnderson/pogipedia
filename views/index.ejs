@@ -25,90 +25,69 @@
         <div id="title">
             <h2>Pogipedia</h2>
         </div>
+        <!-- Pog rarity descriptions -->
+        <div class="light-mode raritydesc" id="raritydesc"></div>
 
         <!-- Color Guide -->
-
         <div id="color-guide" class="guide light-mode">
             <h3>Color Guide</h3>
-            <div class="row">
+            <div id="color-row" class="row">
                 <div class="item">
-                    <div id="trashBox" class="box"></div>
-                    <span>Trash</span>
-                </div>
-                <div class="item">
-                    <div id="commonBox" class="box"></div>
+                    <div class="box" id="common" onmouseenter="descrarityenter('common')"
+                        onmouseleave="descrarityleave()"></div>
                     <span>Common</span>
                 </div>
                 <div class="item">
-                    <div id="uncommonBox" class="box"></div>
+                    <div class="box" id="uncommon" onmouseenter="descrarityenter('uncommon')"
+                        onmouseleave="descrarityleave()"></div>
                     <span>Uncommon</span>
                 </div>
                 <div class="item">
-                    <div id="rareBox" class="box"></div>
+                    <div class="box" id="rare" onmouseenter="descrarityenter('rare')" onmouseleave="descrarityleave()">
+                    </div>
                     <span>Rare</span>
                 </div>
                 <div class="item">
-                    <div id="mythicBox" class="box"></div>
-                    <span>Mythic</span>
+                    <div class="box" id="epic" onmouseenter="descrarityenter('epic')" onmouseleave="descrarityleave()">
+                    </div>
+                    <span>Epic</span>
                 </div>
                 <div class="item">
-                    <div id="unknownBox" class="box"></div>
-                    <span>Unknown</span>
+                    <div class="box" id="legendary" onmouseenter="descrarityenter('legendary')"
+                        onmouseleave="descrarityleave()"></div>
+                    <span>Legendary</span>
+                </div>
+                <div class="item">
+                    <div class="box" id="mythic" onmouseenter="descrarityenter('mythic')"
+                        onmouseleave="descrarityleave()"></div>
+                    <span>Mythic</span>
                 </div>
             </div>
-            
-            <!-- Pog rarity descriptions -->
-            <div class="light-mode raritydesc" id="raritydesc"></div>
-            
-            <!-- Color Guide -->
-            <div class="color-guide light-mode">
-                <h3>Color Guide</h3>
-                <div class="color-row">
-                    <div class="color-item">
-                        <div class="color-box common" onmouseenter="descrarityenter('common')" onmouseleave="descrarityleave()"></div>
-                        <span>Common</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-box uncommon" onmouseenter="descrarityenter('uncommon')" onmouseleave="descrarityleave()"></div>
-                        <span>Uncommon</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-box rare" onmouseenter="descrarityenter('rare')" onmouseleave="descrarityleave()"></div>
-                        <span>Rare</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-box epic" onmouseenter="descrarityenter('epic')" onmouseleave="descrarityleave()"></div>
-                        <span>Epic</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-box legendary" onmouseenter="descrarityenter('legendary')" onmouseleave="descrarityleave()"></div>
-                        <span>Legendary</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-box mythic" onmouseenter="descrarityenter('mythic')" onmouseleave="descrarityleave()"></div>
-                        <span>Mythic</span>
         </div>
 
         <div id="tag-guide" class="guide light-mode">
             <h3>Tag Guide</h3>
-            <div class="row">
+            <div id="tag-row" class="row">
                 <div class="item">
                     <div class="box" id="classPogBox" title="Pogs made to represent the class of a certain year.">
                         <span>Class Pog</span>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="box" id="pokepogBox" title="Pogs made for the PokePogs game. Includes both pogs and slammers.">
+                    <div class="box" id="pokepogBox"
+                        title="Pogs made for the PokePogs game. Includes both pogs and slammers.">
                         <span>PokePogs</span>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="box" id="teacherCreatedBox" title="Pogs designed and made by Mr. Smith, typically for fun or for a special gimmick.">
+                    <div class="box" id="teacherCreatedBox"
+                        title="Pogs designed and made by Mr. Smith, typically for fun or for a special gimmick.">
                         <span>Teacher Created</span>
                     </div>
                 </div>
                 <div class="item">
-                    <div class="box" id="studentCreatedBox" title="Pogs designed by students. Students can pay Mr. Smith pogs to print out new pogs they design.">
+                    <div class="box" id="studentCreatedBox"
+                        title="Pogs designed by students. Students can pay Mr. Smith pogs to print out new pogs they design.">
                         <span>Student Created</span>
                     </div>
                 </div>

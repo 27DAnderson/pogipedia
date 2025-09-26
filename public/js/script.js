@@ -598,8 +598,10 @@ function applyTheme(isDarkMode) {
         document.body.classList.remove('light-mode');
         document.querySelector('.modal-content').classList.add('dark-mode');
         document.querySelector('.modal-content').classList.remove('light-mode');
-        document.querySelector('.color-guide').classList.add('dark-mode');
-        document.querySelector('.color-guide').classList.remove('light-mode');
+        document.querySelectorAll('.guide').forEach(guide => {
+            guide.classList.add('dark-mode');
+            guide.classList.remove('light-mode');
+        });
         document.querySelector('.raritydesc').classList.add('dark-mode');
         document.querySelector('.raritydesc').classList.remove('light-mode');
     } else {
@@ -607,8 +609,10 @@ function applyTheme(isDarkMode) {
         document.body.classList.remove('dark-mode');
         document.querySelector('.modal-content').classList.add('light-mode');
         document.querySelector('.modal-content').classList.remove('dark-mode');
-        document.querySelector('.color-guide').classList.add('light-mode');
-        document.querySelector('.color-guide').classList.remove('dark-mode');
+        document.querySelectorAll('.guide').forEach(guide => {
+            guide.classList.add('light-mode');
+            guide.classList.remove('dark-mode');
+        });
         document.querySelector('.raritydesc').classList.add('light-mode');
         document.querySelector('.raritydesc').classList.remove('dark-mode');
     }
