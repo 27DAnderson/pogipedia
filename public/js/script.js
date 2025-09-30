@@ -123,42 +123,44 @@ function sortByRank(rank) {
         });
 }
 
-function searchPogs() {
-    var idInput = document.getElementById("searchIdInput").value;
-    var nameInput = document.getElementById("searchNameInput").value;
-    var serialInput = document.getElementById("searchSerialInput").value;
-    var tagsInput = document.getElementById("searchTagsInput").value;
+// function searchPogs() {
+//     var idInput = document.getElementById("searchIdInput").value;
+//     var nameInput = document.getElementById("searchNameInput").value;
+//     var serialInput = document.getElementById("searchSerialInput").value;
+//     var tagsInput = document.getElementById("searchTagsInput").value;
 
-    fetch('/searchPogs', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            id: idInput,
-            name: nameInput,
-            serial: serialInput,
-            tags: tagsInput
-        })
-    })
-        .then(data => {
-            var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
-            table.innerHTML = '';
-            data.forEach(function (pog) {
-                var row = table.insertRow();
-                row.style.rank = pog.rank;
-                row.insertCell(0).innerText = pog.uid;
-                row.insertCell(1).innerText = pog.serial;
-                row.insertCell(2).innerText = pog.name;
-                row.insertCell(3).innerText = pog.color;
-                row.insertCell(4).innerText = pog.tags;
-                row.addEventListener('click', function () {
-                    showPogDetails(pog.uid);
-                });
-            });
-        })
+//     fetch('/searchPogs', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             id: idInput,
+//             name: nameInput,
+//             serial: serialInput,
+//             tags: tagsInput
+//         })
+//     })
+//         .then(data => {
+//             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
+//             table.innerHTML = '';
+//             data.forEach(function (pog) {
+//                 console.log(pog.rank);
+                
+//                 var row = table.insertRow();
+//                 row.style.rank = pog.rank;
+//                 row.insertCell(0).innerText = pog.uid;
+//                 row.insertCell(1).innerText = pog.serial;
+//                 row.insertCell(2).innerText = pog.name;
+//                 row.insertCell(3).innerText = pog.color;
+//                 row.insertCell(4).innerText = pog.tags;
+//                 row.addEventListener('click', function () {
+//                     showPogDetails(pog.uid);
+//                 });
+//             });
+//         })
 
-}
+// }
 
 function sortTable(n, isNumeric = false, dir = "asc") {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
@@ -312,8 +314,10 @@ function searchPogs() {
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
+                console.log(pog.rank);
+
                 var row = table.insertRow();
-                row.style.rank = pog.rank; // Set the background color based on rank
+                row.style.backgroundColor = getRank(pog.rank); // Set the background color based on rank
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
