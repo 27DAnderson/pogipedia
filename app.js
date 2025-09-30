@@ -41,20 +41,22 @@ if (process.env.DARK_MODE === 'true') {
 
 // Define color schemes for light and dark modes
 const lightRanks = {
-  'Uncommon': '#EBF8DC',
-  'Trash': '#fcdcdc',
-  'Common': '#ffedc1',
-  'Rare': '#DCF2F8',
-  'Mythic': '#E7D5F3',
-  'Default': '#FFFFFF'
+  'Common':'#ffffff',
+  'Uncommon':'#ebf8dc',
+  'Rare':'#dcf2f8',
+  'Epic':'#e7d5f3',
+  'Legendary':'#fdcc99',
+  'Mythic':'#ff9898',
+  'Default': '#ffffff'
 };
 
 const darkRanks = {
-  'Uncommon': '#3d442f',
-  'Trash': '#412020',
-  'Common': '#4b3317',
-  'Rare': '#2d3f4d',
-  'Mythic': '#34314b',
+  'Common':'#333333',
+  'Uncommon':'#3d442f',
+  'Rare':'#2d3f4d',
+  'Epic':'#34314b',
+  'Legendary':'#4b3317',
+  'Mythic':'#412020',
   'Default': '#333333'
 };
 

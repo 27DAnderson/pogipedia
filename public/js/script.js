@@ -123,42 +123,44 @@ function sortByRank(rank) {
         });
 }
 
-function searchPogs() {
-    var idInput = document.getElementById("searchIdInput").value;
-    var nameInput = document.getElementById("searchNameInput").value;
-    var serialInput = document.getElementById("searchSerialInput").value;
-    var tagsInput = document.getElementById("searchTagsInput").value;
+// function searchPogs() {
+//     var idInput = document.getElementById("searchIdInput").value;
+//     var nameInput = document.getElementById("searchNameInput").value;
+//     var serialInput = document.getElementById("searchSerialInput").value;
+//     var tagsInput = document.getElementById("searchTagsInput").value;
 
-    fetch('/searchPogs', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            id: idInput,
-            name: nameInput,
-            serial: serialInput,
-            tags: tagsInput
-        })
-    })
-        .then(data => {
-            var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
-            table.innerHTML = '';
-            data.forEach(function (pog) {
-                var row = table.insertRow();
-                row.style.rank = pog.rank;
-                row.insertCell(0).innerText = pog.uid;
-                row.insertCell(1).innerText = pog.serial;
-                row.insertCell(2).innerText = pog.name;
-                row.insertCell(3).innerText = pog.color;
-                row.insertCell(4).innerText = pog.tags;
-                row.addEventListener('click', function () {
-                    showPogDetails(pog.uid);
-                });
-            });
-        })
+//     fetch('/searchPogs', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             id: idInput,
+//             name: nameInput,
+//             serial: serialInput,
+//             tags: tagsInput
+//         })
+//     })
+//         .then(data => {
+//             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
+//             table.innerHTML = '';
+//             data.forEach(function (pog) {
+//                 console.log(pog.rank);
+                
+//                 var row = table.insertRow();
+//                 row.style.rank = pog.rank;
+//                 row.insertCell(0).innerText = pog.uid;
+//                 row.insertCell(1).innerText = pog.serial;
+//                 row.insertCell(2).innerText = pog.name;
+//                 row.insertCell(3).innerText = pog.color;
+//                 row.insertCell(4).innerText = pog.tags;
+//                 row.addEventListener('click', function () {
+//                     showPogDetails(pog.uid);
+//                 });
+//             });
+//         })
 
-}
+// }
 
 function sortTable(n, isNumeric = false, dir = "asc") {
     var table, rows, switching, i, x, y, shouldSwitch, switchcount = 0;
@@ -312,8 +314,10 @@ function searchPogs() {
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
+                console.log(pog.rank);
+
                 var row = table.insertRow();
-                row.style.rank = pog.rank; // Set the background color based on rank
+                row.style.backgroundColor = getRank(pog.rank); // Set the background color based on rank
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
@@ -490,13 +494,13 @@ function applyTheme(isDarkMode) {
     if (isDarkMode) {
         document.body.classList.add('dark-mode');
         document.querySelector('.modal-content').classList.add('dark-mode');
-        document.querySelector('#color-guide').classList.add('dark-mode');
-        document.querySelector('#tag-guide').classList.add('dark-mode');
+        document.querySelector('.color-guide').classList.add('dark-mode');
+        document.querySelector('.raritydesc').classList.add('dark-mode');
     } else {
         document.body.classList.remove('dark-mode');
         document.querySelector('.modal-content').classList.remove('dark-mode');
-        document.querySelector('#color-guide').classList.remove('dark-mode');
-        document.querySelector('#tag-guide').classList.remove('dark-mode');
+        document.querySelector('.color-guide').classList.remove('dark-mode');
+        document.querySelector('.raritydesc').classList.remove('dark-mode');
     }
 }
 
@@ -591,6 +595,40 @@ function adjustTable() {
         })
         .catch(error => console.error('Error fetching pogs:', error));
 }
+// Function to apply the theme
+function applyTheme(isDarkMode) {
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        document.body.classList.remove('light-mode');
+        document.querySelector('.modal-content').classList.add('dark-mode');
+        document.querySelector('.modal-content').classList.remove('light-mode');
+        document.querySelectorAll('.guide').forEach(guide => {
+            guide.classList.add('dark-mode');
+            guide.classList.remove('light-mode');
+        });
+        document.querySelector('.raritydesc').classList.add('dark-mode');
+        document.querySelector('.raritydesc').classList.remove('light-mode');
+    } else {
+        document.body.classList.add('light-mode');
+        document.body.classList.remove('dark-mode');
+        document.querySelector('.modal-content').classList.add('light-mode');
+        document.querySelector('.modal-content').classList.remove('dark-mode');
+        document.querySelectorAll('.guide').forEach(guide => {
+            guide.classList.add('light-mode');
+            guide.classList.remove('dark-mode');
+        });
+        document.querySelector('.raritydesc').classList.add('light-mode');
+        document.querySelector('.raritydesc').classList.remove('dark-mode');
+    }
+}
+
+// Function to close the modal
+function closeModal() {
+    var modal = document.getElementById("pogDetailsModal");
+    if (modal) {
+        modal.style.display = "none";
+    }
+}
 
 // Event listener for clicking outside the modal
 window.onclick = function (event) {
@@ -601,22 +639,22 @@ window.onclick = function (event) {
 };
 function getRank(rank) {
     const lightRanks = {
-        'Uncommon': '#EBF8DC',
-        'Trash': '#fcdcdc',
-        'Common': '#ffedc1',
-        'Rare': '#DCF2F8',
-        'Mythic': '#E7D5F3',
-        'Unknown': '#E0E0E0',
-        'Default': '#FFFFFF'
+        'Common':'#ffffff',
+        'Uncommon':'#ebf8dc',
+        'Rare':'#dcf2f8',
+        'Epic':'#e7d5f3',
+        'Legendary':'#fdcc99',
+        'Mythic':'#ff9898',
+        'Default': '#ffffff'
     };
 
     const darkRanks = {
-        'Uncommon': '#3d442f',
-        'Trash': '#412020',
-        'Common': '#4b3317',
-        'Rare': '#2d3f4d',
-        'Mythic': '#34314b',
-        'Unknown': '#4b4b4b',
+        'Common':'#333333',
+        'Uncommon':'#3d442f',
+        'Rare':'#2d3f4d',
+        'Epic':'#34314b',
+        'Legendary':'#4b3317',
+        'Mythic':'#412020',
         'Default': '#333333'
     };
 
@@ -626,3 +664,34 @@ function getRank(rank) {
     // Fallback if rank is undefined or invalid
     return ranks[rank] || ranks['Default'];
 }
+
+// Rarity Description functions
+const raritydesc = document.getElementById("raritydesc");
+function descrarityenter(whichcolor) {
+    raritydesc.style.display = "block";
+    if (whichcolor == "epic") {
+        raritydesc.innerHTML = "<strong>Epic</strong><br>Pogs that are considered low quality or undesirable. These pogs are often mass-produced and lack unique features or designs. They may be damaged, poorly made, or simply not appealing to collectors.";
+    } else if (whichcolor == "common") {
+        raritydesc.innerHTML = "<strong>Common</strong><br>Pogs that are widely available and easy to find. These pogs are typically mass-produced and may feature popular designs or themes. While they may not be particularly rare or valuable, they can still be fun to collect and trade.";
+    } else if (whichcolor == "uncommon") {
+        raritydesc.innerHTML = "<strong>Uncommon</strong><br>Pogs that are less common than regular pogs, but still relatively easy to find. These pogs may feature unique designs or themes, or may be part of a limited edition set. While they may not be particularly rare or valuable, they can still be a fun addition to a collection.";
+    } else if (whichcolor == "rare") {
+        raritydesc.innerHTML = "<strong>Rare</strong><br>Pogs that are hard to find and highly sought after by collectors. These pogs may feature unique designs or themes, or may be part of a limited edition set. They may also be older pogs that are no longer in production. Rare pogs can be quite valuable, and collectors may go to great lengths to acquire them.";
+    } else if (whichcolor == "legendary") {
+        raritydesc.innerHTML = "<strong>Legendary</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Legendary pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
+    } else if (whichcolor == "mythic") {
+        raritydesc.innerHTML = "<strong>Mythic</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Mythic pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
+    } else if (whichcolor == "unknown") {
+        raritydesc.innerHTML = "<strong>Unknown</strong><br>Pogs that have not been assigned a rarity level. These pogs may be new releases or pogs that have not yet been evaluated by collectors. While they may not have a defined rarity level, they can still be a fun addition to a collection.";
+    }
+}
+function descrarityleave() {
+    raritydesc.style.display = "none";
+}
+document.addEventListener('mousemove', (event) => {
+    if (raritydesc.style.display === "block") {
+        raritydesc.style.left = `${event.pageX + 10}px`;
+        raritydesc.style.top = `${event.pageY + 25}px`;
+        raritydesc.style.right = `${window.innerWidth - (event.pageX + 10 + 500)}px`;
+    }  
+});

@@ -89,7 +89,6 @@ footer .back-to-top:hover {
     overflow-y: auto;
     padding: 20px;
     box-sizing: border-box;
-    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-size: medium;
@@ -228,6 +227,8 @@ tbody tr:hover {
     cursor: pointer;
 }
 
+
+/* Switch styles */
 .switch {
     position: absolute;
     top: 20px;
@@ -296,8 +297,15 @@ input:checked + .slider:before {
 .row {
     display: flex;
     justify-content: center;
-    gap: 20px;
     flex-wrap: wrap;
+}
+
+#color-row {
+    gap: 10px;
+}
+
+#tag-row {
+    gap: 20px;
 }
 
 .item {
@@ -305,6 +313,7 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 75.63px;
 }
 
 #color-guide .box {
@@ -343,7 +352,7 @@ body.dark-mode h2 {
     color: #7c7a7a;
 }
 
-body.dark-mode .modal-content {
+.modal-content.dark-mode{
     background-color: #1e1e1e;
     color: #fff;
     border: 1px solid #444;
@@ -364,17 +373,38 @@ body.dark-mode .modal-content {
 }
 
 /* Light mode colors */
-.guide.light-mode .box#trashBox { background-color: #fcdcdc; }
-.guide.light-mode .box#commonBox { background-color: #ffedc1; }
-.guide.light-mode .box#uncommonBox { background-color: #ebf8dc; }
-.guide.light-mode .box#rareBox { background-color: #dcf2f8; }
-.guide.light-mode .box#mythicBox { background-color: #e7d5f3; }
-.guide.light-mode .box#unknownBox { background-color: #fff; }
+.guide.light-mode .box#common { background-color: #ffffff; }
+.guide.light-mode .box#uncommon { background-color: #ebf8dc; }
+.guide.light-mode .box#rare { background-color: #dcf2f8; }
+.guide.light-mode .box#epic { background-color: #e7d5f3; }
+.guide.light-mode .box#mythic { background-color: #ff9898; }
+.guide.light-mode .box#legendary { background-color: #fdcc99; }
 
 /* Dark mode colors */
-.guide.dark-mode .box#trashBox { background-color: #412020; }
-.guide.dark-mode .box#commonBox { background-color: #4b3317; }
-.guide.dark-mode .box#uncommonBox { background-color: #3d442f; }
-.guide.dark-mode .box#rareBox { background-color: #2d3f4d; }
-.guide.dark-mode .box#mythicBox { background-color: #0e0b22; }
-.guide.dark-mode .box#unknownBox { background-color: #333; }
+.guide.dark-mode .box#common { background-color: #333333; }
+.guide.dark-mode .box#uncommon { background-color: #3d442f; }
+.guide.dark-mode .box#rare { background-color: #2d3f4d; }
+.guide.dark-mode .box#epic { background-color: #34314b; }
+.guide.dark-mode .box#legendary { background-color: #4b3317; }
+.guide.dark-mode .box#mythic { background-color: #412020; }
+
+.raritydesc.light-mode {
+    display: none;
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 9999;
+}
+.raritydesc.dark-mode {
+    display: none;
+    position: absolute;
+    background: rgba(18, 18, 18, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 9999;
+}
