@@ -8,54 +8,96 @@ function showTab(tabId) {
 
 document.addEventListener("DOMContentLoaded", function () {
     // event listeners for each color guide box
-    document.getElementById("trashBox").addEventListener("click", function () {
-        console.log("Trash box clicked");
-        sortByTag("Trash");
+    document.getElementById("common").addEventListener("click", function () {
+        //console.log("Common box clicked");
+        sortByRank("Common");
+        clearSearchInputs()
     });
-
-    document.getElementById("commonBox").addEventListener("click", function () {
-        console.log("Common box clicked");
-        sortByTag("Common");
+    document.getElementById("uncommon").addEventListener("click", function () {
+        //console.log("Uncommon box clicked");
+        sortByRank("Uncommon");
+        clearSearchInputs()
     });
-
-    document.getElementById("uncommonBox").addEventListener("click", function () {
-        console.log("Uncommon box clicked");
-        sortByTag("Uncommon");
+    document.getElementById("rare").addEventListener("click", function () {
+        //console.log("Rare box clicked");
+        sortByRank("Rare");
+        clearSearchInputs()
     });
-
-    document.getElementById("rareBox").addEventListener("click", function () {
-        console.log("Rare box clicked");
-        sortByTag("Rare");
+    document.getElementById("epic").addEventListener("click", function () {
+        //console.log("Epic box clicked");
+        sortByRank("Epic");
+        clearSearchInputs()
     });
-
-    document.getElementById("mythicBox").addEventListener("click", function () {
-        console.log("Mythic box clicked");
-        sortByTag("Mythic");
+    document.getElementById("legendary").addEventListener("click", function () {
+        //console.log("Legendary box clicked");
+        sortByRank("Legendary");
+        clearSearchInputs()
     });
-    document.getElementById("unknownBox").addEventListener("click", function () {
-        console.log("Unknown box clicked");
-        sortByTag("Unknown");
+    document.getElementById("mythic").addEventListener("click", function () {
+        //console.log("Mythic box clicked");
+        sortByRank("Mythic");
+        clearSearchInputs()
     });
-
     // event listeners for each tag guide box
     document.getElementById("classPogBox").addEventListener("click", function () {
         //console.log("Class Pog box clicked");
+        clearSearchInputs()
         sortByTag("Class Pog");
     });
 
     document.getElementById("pokepogBox").addEventListener("click", function () {
         //console.log("PokePogs box clicked");
+        clearSearchInputs()
         sortByTag("PokePogs");
     });
 
     document.getElementById("teacherCreatedBox").addEventListener("click", function () {
         //console.log("Teacher Created box clicked");
+        clearSearchInputs()
         sortByTag("Teacher Created");
     });
 
     document.getElementById("studentCreatedBox").addEventListener("click", function () {
         //console.log("Student Created box clicked");
+        clearSearchInputs()
         sortByTag("Student Created");
+    });
+
+    document.getElementById("clearBox").addEventListener("click", function () {
+        //console.log("Clear Created box clicked");
+        clearSearchInputs()
+        searchPogs()
+    });
+
+    document.getElementsByTagName("thead")[0].addEventListener("click", function (event) {
+        const index = Array.from(event.target.parentNode.children).indexOf(event.target);
+        if (index === 0) {
+            //console.log("ID cell clicked"); 
+            sortTable(0, true);
+            if (document.getElementById("sortOptions").value == "idAsc") {
+                sortTable(0, true, "asc");
+                document.getElementById("sortOptions").value = "idDesc";
+            } else {
+                sortTable(0, true, "desc");
+                document.getElementById("sortOptions").value = "idAsc";
+            }
+        } else if (index === 1) {
+            //console.log("Serial cell clicked");
+            sortTable(1);
+            document.getElementById("sortOptions").value = "serialAsc";
+        } else if (index === 2) {
+            //console.log("Name cell clicked");
+            sortTable(2, false, "asc");
+            document.getElementById("sortOptions").value = "nameAsc";
+        } else if (index === 3) {
+            //console.log("Color cell clicked");
+            sortTable(3);
+            document.getElementById("sortOptions").value = "colorAsc";
+        } else if (index === 4) {
+            //console.log("Tags cell clicked");
+            sortTable(4);
+            document.getElementById("sortOptions").value = "tagsAsc";
+        }
     });
 });
 
@@ -75,7 +117,7 @@ function sortByTag(tag) {
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
                 var row = table.insertRow();
-                row.style.Rank = pog.Rank;
+                row.style.backgroundColor = getRank(pog.rank);
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
@@ -107,15 +149,17 @@ function sortByRank(rank) {
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
                 var row = table.insertRow();
-                row.style.rank = pog.rank;
-                row.insertCell(0).innerText = pog.uid;
-                row.insertCell(1).innerText = pog.serial;
-                row.insertCell(2).innerText = pog.name;
-                row.insertCell(3).innerText = pog.color;
-                row.insertCell(4).innerText = pog.tags;
-                row.addEventListener('click', function () {
-                    showPogDetails(pog.uid);
-                });
+                row.style.backgroundColor = getRank(pog.rank);
+                if (pog.rank == rank) {
+                    row.insertCell(0).innerText = pog.uid;
+                    row.insertCell(1).innerText = pog.serial;
+                    row.insertCell(2).innerText = pog.name;
+                    row.insertCell(3).innerText = pog.color;
+                    row.insertCell(4).innerText = pog.tags;
+                    row.addEventListener('click', function () {
+                        showPogDetails(pog.uid);
+                    });
+                }
             });
         })
         .catch(error => {
@@ -394,14 +438,23 @@ function handleSort() {
         case "nameDesc":
             sortTable(2, false, "desc");
             break;
-        case "serial":
-            sortTable(1);
+        case "serialAsc":
+            sortTable(1, false, "asc");
             break;
-        case "color":
-            sortTable(3);
+        case "serialDesc":
+            sortTable(1, false, "desc");
             break;
-        case "tags":
-            sortTable(4);
+        case "colorAsc":
+            sortTable(3, false, "asc");
+            break;
+        case "colorDesc":
+            sortTable(3, false, "desc");
+            break;
+        case "tagsAsc":
+            sortTable(4, false, "asc");
+            break;
+        case "tagsDesc":
+            sortTable(4, false, "desc");
             break;
     }
 }
