@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", function () {
         sortByRank("Mythic");
         clearSearchInputs()
     });
+    document.getElementById("clearRanksBox").addEventListener("click", function () {
+        //console.log("Clear Created box clicked");
+        clearSearchInputs()
+        searchPogs()
+    });
     // event listeners for each tag guide box
     document.getElementById("classPogBox").addEventListener("click", function () {
         //console.log("Class Pog box clicked");
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
         sortByTag("Student Created");
     });
 
-    document.getElementById("clearBox").addEventListener("click", function () {
+    document.getElementById("clearTagsBox").addEventListener("click", function () {
         //console.log("Clear Created box clicked");
         clearSearchInputs()
         searchPogs()
@@ -72,31 +77,65 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementsByTagName("thead")[0].addEventListener("click", function (event) {
         const index = Array.from(event.target.parentNode.children).indexOf(event.target);
         if (index === 0) {
-            //console.log("ID cell clicked"); 
-            sortTable(0, true);
             if (document.getElementById("sortOptions").value == "idAsc") {
-                sortTable(0, true, "asc");
-                document.getElementById("sortOptions").value = "idDesc";
-            } else {
                 sortTable(0, true, "desc");
-                document.getElementById("sortOptions").value = "idAsc";
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "idDesc";
+                }, 0);
+            } else {
+                sortTable(0, true, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "idAsc";
+                }, 0);
             }
         } else if (index === 1) {
-            //console.log("Serial cell clicked");
-            sortTable(1);
-            document.getElementById("sortOptions").value = "serialAsc";
+            if (document.getElementById("sortOptions").value == "serialAsc") {
+                sortTable(1, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "serialDesc";
+                }, 0);
+            } else {
+                sortTable(1, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "serialAsc";
+                }, 0);
+            }
         } else if (index === 2) {
-            //console.log("Name cell clicked");
-            sortTable(2, false, "asc");
-            document.getElementById("sortOptions").value = "nameAsc";
+            if (document.getElementById("sortOptions").value == "nameAsc") {
+                sortTable(2, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "nameDesc";
+                }, 0);
+            } else {
+                sortTable(2, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "nameAsc";
+                }, 0);
+            }
         } else if (index === 3) {
-            //console.log("Color cell clicked");
-            sortTable(3);
-            document.getElementById("sortOptions").value = "colorAsc";
+            if (document.getElementById("sortOptions").value == "colorAsc") {
+                sortTable(3, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "colorDesc";
+                }, 0);
+            } else {
+                sortTable(3, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "colorAsc";
+                }, 0);
+            }
         } else if (index === 4) {
-            //console.log("Tags cell clicked");
-            sortTable(4);
-            document.getElementById("sortOptions").value = "tagsAsc";
+            if (document.getElementById("sortOptions").value == "tagsAsc") {
+                sortTable(4, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "tagsDesc";
+                }, 0);
+            } else {
+                sortTable(4, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "tagsAsc";
+                }, 0);
+            }
         }
     });
 });
@@ -113,6 +152,7 @@ function sortByTag(tag) {
     })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("sortOptions").value = 'idAsc';
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
@@ -145,20 +185,29 @@ function sortByRank(rank) {
     })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("sortOptions").value = 'idAsc';
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
+
+            // Populate the table with all rows
             data.forEach(function (pog) {
                 var row = table.insertRow();
                 row.style.backgroundColor = getRank(pog.rank);
-                if (pog.rank == rank) {
-                    row.insertCell(0).innerText = pog.uid;
-                    row.insertCell(1).innerText = pog.serial;
-                    row.insertCell(2).innerText = pog.name;
-                    row.insertCell(3).innerText = pog.color;
-                    row.insertCell(4).innerText = pog.tags;
-                    row.addEventListener('click', function () {
-                        showPogDetails(pog.uid);
-                    });
+                row.insertCell(0).innerText = pog.uid;
+                row.insertCell(1).innerText = pog.serial;
+                row.insertCell(2).innerText = pog.name;
+                row.insertCell(3).innerText = pog.color;
+                row.insertCell(4).innerText = pog.tags;
+                row.addEventListener('click', function () {
+                    showPogDetails(pog.uid);
+                });
+
+                // Add a data attribute for filtering
+                row.setAttribute('data-rank', pog.rank);
+
+                // Hide rows that don't match the rank filter
+                if (pog.rank != rank) {
+                    row.style.display = 'none';
                 }
             });
         })
@@ -338,6 +387,7 @@ function searchPogs() {
     var nameInput = document.getElementById("searchNameInput").value;
     var serialInput = document.getElementById("searchSerialInput").value;
     var tagsInput = document.getElementById("searchTagsInput").value;
+    document.getElementById("sortOptions").value = 'idAsc';
 
     fetch('/searchPogs', {
         method: 'POST',
@@ -353,6 +403,7 @@ function searchPogs() {
     })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("sortOptions").value = 'idAsc';
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
@@ -537,6 +588,7 @@ function clearSearchInputs() {
     document.getElementById("searchNameInput").value = '';
     document.getElementById("searchSerialInput").value = '';
     document.getElementById("searchTagsInput").value = '';
+    document.getElementById("sortOptions").value = 'idAsc';
 }
 
 function applyTheme(isDarkMode) {
@@ -730,6 +782,8 @@ function descrarityenter(whichcolor) {
         raritydesc.innerHTML = "<strong>Legendary</strong><br>Pogs almost no one has, only few exist. Basically never given out. Designs are unique and niche.";
     } else if (whichcolor == "mythic") {
         raritydesc.innerHTML = "<strong>Mythic</strong><br>Pogs that are basically one of a kind, only one or two exist.";
+    } else if (whichcolor == "clear") {
+        raritydesc.innerHTML = "<strong>Clear</strong><br>Clear the ranks filter.";
     }
 }
 function descrarityleave() {
