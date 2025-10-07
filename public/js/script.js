@@ -8,54 +8,135 @@ function showTab(tabId) {
 
 document.addEventListener("DOMContentLoaded", function () {
     // event listeners for each color guide box
-    document.getElementById("trashBox").addEventListener("click", function () {
-        console.log("Trash box clicked");
-        sortByTag("Trash");
+    document.getElementById("common").addEventListener("click", function () {
+        //console.log("Common box clicked");
+        sortByRank("Common");
+        clearSearchInputs()
     });
-
-    document.getElementById("commonBox").addEventListener("click", function () {
-        console.log("Common box clicked");
-        sortByTag("Common");
+    document.getElementById("uncommon").addEventListener("click", function () {
+        //console.log("Uncommon box clicked");
+        sortByRank("Uncommon");
+        clearSearchInputs()
     });
-
-    document.getElementById("uncommonBox").addEventListener("click", function () {
-        console.log("Uncommon box clicked");
-        sortByTag("Uncommon");
+    document.getElementById("rare").addEventListener("click", function () {
+        //console.log("Rare box clicked");
+        sortByRank("Rare");
+        clearSearchInputs()
     });
-
-    document.getElementById("rareBox").addEventListener("click", function () {
-        console.log("Rare box clicked");
-        sortByTag("Rare");
+    document.getElementById("epic").addEventListener("click", function () {
+        //console.log("Epic box clicked");
+        sortByRank("Epic");
+        clearSearchInputs()
     });
-
-    document.getElementById("mythicBox").addEventListener("click", function () {
-        console.log("Mythic box clicked");
-        sortByTag("Mythic");
+    document.getElementById("legendary").addEventListener("click", function () {
+        //console.log("Legendary box clicked");
+        sortByRank("Legendary");
+        clearSearchInputs()
     });
-    document.getElementById("unknownBox").addEventListener("click", function () {
-        console.log("Unknown box clicked");
-        sortByTag("Unknown");
+    document.getElementById("mythic").addEventListener("click", function () {
+        //console.log("Mythic box clicked");
+        sortByRank("Mythic");
+        clearSearchInputs()
     });
-
+    document.getElementById("clearRanksBox").addEventListener("click", function () {
+        //console.log("Clear Created box clicked");
+        clearSearchInputs()
+        searchPogs()
+    });
     // event listeners for each tag guide box
     document.getElementById("classPogBox").addEventListener("click", function () {
         //console.log("Class Pog box clicked");
+        clearSearchInputs()
         sortByTag("Class Pog");
     });
 
     document.getElementById("pokepogBox").addEventListener("click", function () {
         //console.log("PokePogs box clicked");
+        clearSearchInputs()
         sortByTag("PokePogs");
     });
 
     document.getElementById("teacherCreatedBox").addEventListener("click", function () {
         //console.log("Teacher Created box clicked");
+        clearSearchInputs()
         sortByTag("Teacher Created");
     });
 
     document.getElementById("studentCreatedBox").addEventListener("click", function () {
         //console.log("Student Created box clicked");
+        clearSearchInputs()
         sortByTag("Student Created");
+    });
+
+    document.getElementById("clearTagsBox").addEventListener("click", function () {
+        //console.log("Clear Created box clicked");
+        clearSearchInputs()
+        searchPogs()
+    });
+
+    document.getElementsByTagName("thead")[0].addEventListener("click", function (event) {
+        const index = Array.from(event.target.parentNode.children).indexOf(event.target);
+        if (index === 0) {
+            if (document.getElementById("sortOptions").value == "idAsc") {
+                sortTable(0, true, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "idDesc";
+                }, 0);
+            } else {
+                sortTable(0, true, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "idAsc";
+                }, 0);
+            }
+        } else if (index === 1) {
+            if (document.getElementById("sortOptions").value == "serialAsc") {
+                sortTable(1, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "serialDesc";
+                }, 0);
+            } else {
+                sortTable(1, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "serialAsc";
+                }, 0);
+            }
+        } else if (index === 2) {
+            if (document.getElementById("sortOptions").value == "nameAsc") {
+                sortTable(2, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "nameDesc";
+                }, 0);
+            } else {
+                sortTable(2, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "nameAsc";
+                }, 0);
+            }
+        } else if (index === 3) {
+            if (document.getElementById("sortOptions").value == "colorAsc") {
+                sortTable(3, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "colorDesc";
+                }, 0);
+            } else {
+                sortTable(3, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "colorAsc";
+                }, 0);
+            }
+        } else if (index === 4) {
+            if (document.getElementById("sortOptions").value == "tagsAsc") {
+                sortTable(4, false, "desc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "tagsDesc";
+                }, 0);
+            } else {
+                sortTable(4, false, "asc");
+                setTimeout(() => {
+                    document.getElementById("sortOptions").value = "tagsAsc";
+                }, 0);
+            }
+        }
     });
 });
 
@@ -71,11 +152,12 @@ function sortByTag(tag) {
     })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("sortOptions").value = 'idAsc';
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
                 var row = table.insertRow();
-                row.style.Rank = pog.Rank;
+                row.style.backgroundColor = getRank(pog.rank);
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
@@ -103,11 +185,14 @@ function sortByRank(rank) {
     })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("sortOptions").value = 'idAsc';
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
+
+            // Populate the table with all rows
             data.forEach(function (pog) {
                 var row = table.insertRow();
-                row.style.rank = pog.rank;
+                row.style.backgroundColor = getRank(pog.rank);
                 row.insertCell(0).innerText = pog.uid;
                 row.insertCell(1).innerText = pog.serial;
                 row.insertCell(2).innerText = pog.name;
@@ -116,6 +201,14 @@ function sortByRank(rank) {
                 row.addEventListener('click', function () {
                     showPogDetails(pog.uid);
                 });
+
+                // Add a data attribute for filtering
+                row.setAttribute('data-rank', pog.rank);
+
+                // Hide rows that don't match the rank filter
+                if (pog.rank != rank) {
+                    row.style.display = 'none';
+                }
             });
         })
         .catch(error => {
@@ -145,8 +238,6 @@ function sortByRank(rank) {
 //             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
 //             table.innerHTML = '';
 //             data.forEach(function (pog) {
-//                 console.log(pog.rank);
-                
 //                 var row = table.insertRow();
 //                 row.style.rank = pog.rank;
 //                 row.insertCell(0).innerText = pog.uid;
@@ -291,11 +382,17 @@ function showTab(tabId) {
     });
     document.getElementById(tabId).classList.add('active');
 }
+document.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        searchPogs();
+    }
+});
 function searchPogs() {
     var idInput = document.getElementById("searchIdInput").value;
     var nameInput = document.getElementById("searchNameInput").value;
     var serialInput = document.getElementById("searchSerialInput").value;
     var tagsInput = document.getElementById("searchTagsInput").value;
+    document.getElementById("sortOptions").value = 'idAsc';
 
     fetch('/searchPogs', {
         method: 'POST',
@@ -311,11 +408,10 @@ function searchPogs() {
     })
         .then(response => response.json())
         .then(data => {
+            document.getElementById("sortOptions").value = 'idAsc';
             var table = document.getElementById("allPogsTable").getElementsByTagName('tbody')[0];
             table.innerHTML = ''; // Clear the table before adding new rows
             data.forEach(function (pog) {
-                console.log(pog.rank);
-
                 var row = table.insertRow();
                 row.style.backgroundColor = getRank(pog.rank); // Set the background color based on rank
                 row.insertCell(0).innerText = pog.uid;
@@ -398,14 +494,23 @@ function handleSort() {
         case "nameDesc":
             sortTable(2, false, "desc");
             break;
-        case "serial":
-            sortTable(1);
+        case "serialAsc":
+            sortTable(1, false, "asc");
             break;
-        case "color":
-            sortTable(3);
+        case "serialDesc":
+            sortTable(1, false, "desc");
             break;
-        case "tags":
-            sortTable(4);
+        case "colorAsc":
+            sortTable(3, false, "asc");
+            break;
+        case "colorDesc":
+            sortTable(3, false, "desc");
+            break;
+        case "tagsAsc":
+            sortTable(4, false, "asc");
+            break;
+        case "tagsDesc":
+            sortTable(4, false, "desc");
             break;
     }
 }
@@ -488,6 +593,7 @@ function clearSearchInputs() {
     document.getElementById("searchNameInput").value = '';
     document.getElementById("searchSerialInput").value = '';
     document.getElementById("searchTagsInput").value = '';
+    document.getElementById("sortOptions").value = 'idAsc';
 }
 
 function applyTheme(isDarkMode) {
@@ -669,20 +775,20 @@ function getRank(rank) {
 const raritydesc = document.getElementById("raritydesc");
 function descrarityenter(whichcolor) {
     raritydesc.style.display = "block";
-    if (whichcolor == "epic") {
-        raritydesc.innerHTML = "<strong>Epic</strong><br>Pogs that are considered low quality or undesirable. These pogs are often mass-produced and lack unique features or designs. They may be damaged, poorly made, or simply not appealing to collectors.";
-    } else if (whichcolor == "common") {
-        raritydesc.innerHTML = "<strong>Common</strong><br>Pogs that are widely available and easy to find. These pogs are typically mass-produced and may feature popular designs or themes. While they may not be particularly rare or valuable, they can still be fun to collect and trade.";
+    if (whichcolor == "common") {
+        raritydesc.innerHTML = "<strong>Common</strong><br>Pogs that are given out often and many people already have. Such as class pogs, they have common designs.";
     } else if (whichcolor == "uncommon") {
-        raritydesc.innerHTML = "<strong>Uncommon</strong><br>Pogs that are less common than regular pogs, but still relatively easy to find. These pogs may feature unique designs or themes, or may be part of a limited edition set. While they may not be particularly rare or valuable, they can still be a fun addition to a collection.";
+        raritydesc.innerHTML = "<strong>Uncommon</strong><br>Pogs that are less commonly given out and less people have. They have more interesting or unique designs.";
     } else if (whichcolor == "rare") {
-        raritydesc.innerHTML = "<strong>Rare</strong><br>Pogs that are hard to find and highly sought after by collectors. These pogs may feature unique designs or themes, or may be part of a limited edition set. They may also be older pogs that are no longer in production. Rare pogs can be quite valuable, and collectors may go to great lengths to acquire them.";
+        raritydesc.innerHTML = "<strong>Rare</strong><br>Pogs that not aren't often given out and not a lot of people have. They have very interesting and unique designs.";
+    } else if (whichcolor == "epic") {
+        raritydesc.innerHTML = "<strong>Epic</strong><br>Pogs that aren't usually given out and only few people have. Very uniquely interesting designs.";
     } else if (whichcolor == "legendary") {
-        raritydesc.innerHTML = "<strong>Legendary</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Legendary pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
+        raritydesc.innerHTML = "<strong>Legendary</strong><br>Pogs almost no one has, only few exist. Basically never given out. Designs are unique and niche.";
     } else if (whichcolor == "mythic") {
-        raritydesc.innerHTML = "<strong>Mythic</strong><br>Pogs that are extremely rare and highly coveted by collectors. These pogs may feature unique designs or themes, or may be part of a very limited edition set. They may also be older pogs that are no longer in production, or pogs that were only available through special promotions or events. Mythic pogs can be incredibly valuable, and collectors may pay top dollar to acquire them.";
-    } else if (whichcolor == "unknown") {
-        raritydesc.innerHTML = "<strong>Unknown</strong><br>Pogs that have not been assigned a rarity level. These pogs may be new releases or pogs that have not yet been evaluated by collectors. While they may not have a defined rarity level, they can still be a fun addition to a collection.";
+        raritydesc.innerHTML = "<strong>Mythic</strong><br>Pogs that are basically one of a kind, only one or two exist.";
+    } else if (whichcolor == "clear") {
+        raritydesc.innerHTML = "<strong>Clear</strong><br>Clear the ranks filter.";
     }
 }
 function descrarityleave() {

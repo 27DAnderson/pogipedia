@@ -77,6 +77,10 @@ footer .back-to-top:hover {
     font-size: 1.2em;
 }
 
+.search-bar button {
+    cursor: pointer;
+}
+
 #pogDetailsContent {
     display: flex;
     flex-direction: row;
@@ -333,6 +337,7 @@ input:checked + .slider:before {
     height: 40px;
     border: 1px solid #000;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .item span {
@@ -407,4 +412,9 @@ body.dark-mode h2 {
     border-radius: 5px;
     pointer-events: none;
     z-index: 9999;
+}
+
+thead {
+    user-select: none;
+    cursor: pointer;
 }

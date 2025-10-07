@@ -4,10 +4,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const session = require('express-session');
-const AUTH_URL = 'http://localhost:420/oauth';
-const THIS_URL = 'http://172.16.3.209:3000/login';
+require('dotenv').config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const AUTH_URL = process.env.AUTH_URL || 'http://localhost:420/oauth';
+const THIS_URL = process.env.THIS_URL || 'http://localhost:3000/login';
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
